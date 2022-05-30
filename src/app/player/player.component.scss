@@ -1,0 +1,28 @@
+.player {
+    display: flex;
+    align-items: center;
+    background-color: rgba(50, 50, 50, 0.6);
+    width: 300px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    
+    p {
+        font-size: 32px;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    img {
+        margin: 16px;
+        padding: 4px;
+        width: 44px;
+        height: 44px;
+        object-fit: cover;
+        border-radius: 100%;
+        background-color: white;
+    }
+}
+
+.player-active {
+    background-color: rgba(50, 50, 50) !important;
+}
