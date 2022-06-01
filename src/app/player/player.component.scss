@@ -26,3 +26,20 @@
 .player-active {
     background-color: rgba(50, 50, 50) !important;
 }
+
+@media (max-width: 700px) {
+    .player {
+        width: 150px;
+        height: 60px;
+        
+        p {
+            font-size: 24px;
+            margin: 0;
+            margin-left: 24px;
+        }
+
+        img {
+            display: none;
+        }
+    }
+}

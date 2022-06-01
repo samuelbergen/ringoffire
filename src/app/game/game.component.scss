@@ -1,9 +1,31 @@
+.bg {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    object-fit: cover;
+}
+
 .field {
     width: 100vw;
     height: 100vh;
     max-width: 100%;
-    background-image: url('/assets/img/board.jpg');
-    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-container {
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    bottom: 130px;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +36,7 @@
 
     img {
         position: absolute;
-        width: 120px;
+        width: 140px;
     }
 }
 
@@ -29,7 +51,7 @@
 
 .pick-card {
     transition: all 125ms ease-in-out;
-    transform: scale(1.3) translateX(140px) translateY(-180px) rotate(-10deg);
+    transform: scale(1) translateX(170px) translateY(-200px) rotate(-15deg);
     animation: pick-card-animation 1s ease-in-out;
 }
 
@@ -38,19 +60,20 @@
         transform: scale(1);
     }
     40% {
-        transform: scale(1.7);
+        transform: scale(1.5);
     }
     60% {
-        transform: scale(1.7);
+        transform: scale(1.5);
     }
     100% {
-        transform: scale(1.3) translateX(140px) translateY(-180px) rotate(-10deg);
+        transform: scale(1) translateX(170px) translateY(-200px) rotate(-15deg);
     }
 }
 
 .played-card {
     right: 25px;
-    transform: scale(1.3) translateX(140px) translateY(-180px) rotate(-10deg);
+    top: -50px;
+    transform: scale(1) translateX(170px) translateY(-200px) rotate(-15deg);
 }
 
 .player-position {
@@ -69,4 +92,55 @@
     bottom: 32px;
     left: 32px;
     right: 120px;
+}
+
+@media (max-width: 1000px) {
+    .field {
+        justify-content: left;
+    }
+
+    .card-stack {
+        margin-left: 300px;
+    }
+}
+
+@media (max-width: 775px) {
+    .card-stack {
+        margin-left: 200px;
+    }
+}
+
+@media (max-width: 600px) {
+    .card-stack {
+        img {
+            width: 120px;
+        }
+    }
+    
+    .pick-card {
+        transition: all 125ms ease-in-out;
+        transform: scale(1.1)  translateY(-230px);
+        animation: pick-card-animation 1s ease-in-out;
+    }
+    
+    @keyframes pick-card-animation {
+        0% {
+            transform: scale(1.1);
+        }
+        40% {
+            transform: scale(1.5);
+        }
+        60% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1.1) translateY(-230px);
+        }
+    }
+    
+    .played-card {
+        right: 25px;
+        top: -50px;
+        transform: scale(1.1) translateY(-230px);
+    }
 }

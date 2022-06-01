@@ -25,29 +25,40 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (!this.pickCardAnimation) {
-      this.currentCard = this.game.stack.pop();
-      this.pickCardAnimation = true;
-      console.log('New card: ' + this.currentCard);
-      console.log('Game is: ', this.game);
+    if (this.game.players.length >= 2) {
+      if (!this.pickCardAnimation) {
+        this.currentCard = this.game.stack.pop();
+        this.pickCardAnimation = true;
+        console.log('New card: ' + this.currentCard);
+        console.log('Game is: ', this.game);
 
-      this.game.currentPlayer++;
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+        this.game.currentPlayer++;
+        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
 
-      setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAnimation = false;
-      }, 1000)
+        setTimeout(() => {
+          this.game.playedCards.push(this.currentCard);
+          this.pickCardAnimation = false;
+        }, 1000)
+      }
+    }
+    else {
+      this.openDialog();
     }
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+    if (this.game.players.length < 10) {
+      const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    dialogRef.afterClosed().subscribe((name: string) => {
-      if (name && name.length > 0) {
-        this.game.players.push(name);
-      }
-    });
+      dialogRef.afterClosed().subscribe((name: string) => {
+          if (name && name.length > 0) {
+            this.game.players.push(name);
+          }
+        });
+    }
+    else {
+      alert('You can\'t add more players');
+    }
   }
+
 }
