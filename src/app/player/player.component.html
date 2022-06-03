@@ -1,5 +1,5 @@
-<div class="player" [class.player-active]="playerActive">
-    <img src="assets/img/profile_picture.png">
-    <p>{{ name }}</p>
+<div class="player" [class.player-active]="playerActive" (click)="editPlayer(i)">
+    <img src="assets/img/{{ player.profilePicture }}">
+    <span>{{ player.name }}</span>
 </div>
 

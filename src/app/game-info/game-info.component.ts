@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Player } from 'src/models/player.class';
 
 @Component({
   selector: 'app-game-info',
@@ -15,7 +16,7 @@ export class GameInfoComponent implements OnInit, OnChanges {
     { title: 'Chicks', description: 'All girls drink.' },
     { title: 'Heaven', description: 'Put your hands up! The last player drinks!' },
     { title: 'Mate', description: 'Pick a mate. Your mate must always drink when you drink and the other way around.' },
-    { title: 'Thumbmaster', description: 'the player who drew the card must put their thumb on the table at a chosen time. The last person to put their thumb on the table must drink' },
+    { title: 'Thumbmaster', description: 'The player who drew the card must put their thumb on the table at a chosen time. The last person to put their thumb on the table must drink' },
     { title: 'Men', description: 'All men drink.' },
     { title: 'Questionmaster', description: 'You are now the question master. If you ask a player a question and they answer, they have to drink. If they answer the question with “Fuck you question master” then you have to drink.' },
     { title: 'Never have i ever...', description: 'Say something you nnever did. Everyone who did it has to drink.' },
@@ -24,16 +25,21 @@ export class GameInfoComponent implements OnInit, OnChanges {
 
   title: string = '';
   description: string = '';
-  @Input() card:string;
+  @Input() card: string;
+  @Input() players: Player[];
 
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnChanges(): void {
-    if(this.card) {
+    if (this.players.length < 2) {
+      this.title = 'Add players';
+      this.description = 'Add at least two players with the add button to play.';
+    }
+    else if (this.card) {
       let cardNumber = +this.card.split('_')[1];
       this.title = this.cardAction[cardNumber - 1].title;
       this.description = this.cardAction[cardNumber - 1].description;

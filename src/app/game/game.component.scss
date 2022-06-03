@@ -21,7 +21,8 @@
 
 .player-container {
     position: fixed;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     top: 0;
     bottom: 130px;
     left: 0;
@@ -29,6 +30,53 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.game-over {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    .gameover-bg {
+        position: fixed;
+        object-fit: cover;
+        height: 100vh;
+        width: 100vw;
+        max-width: 100%;
+    }
+
+    .reload-img {
+        z-index: 3;
+        width: 220px;
+        cursor: pointer;
+
+        &:hover {
+            filter:brightness(1.2);
+        }
+    }
+}
+
+.scroll-container {
+    margin: 0 4px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    z-index: 1;
+    overflow-x: auto;
+
+    app-player-mobile {
+        margin: 0 4px;
+    }
 }
 
 .card-stack {
@@ -59,12 +107,15 @@
     0% {
         transform: scale(1);
     }
+
     40% {
         transform: scale(1.5);
     }
+
     60% {
         transform: scale(1.5);
     }
+
     100% {
         transform: scale(1) translateX(170px) translateY(-200px) rotate(-15deg);
     }
@@ -79,20 +130,25 @@
 .player-position {
     position: absolute;
     right: 0;
-    z-index: 1;
 }
 
 .btn-add {
     position: absolute;
     right: 32px;
-    bottom: 32px;
+    bottom: 24px;
 }
 
 .pin-bottom {
     position: absolute;
-    bottom: 32px;
+    bottom: 24px;
     left: 32px;
     right: 120px;
+
+    @media (max-width: 720px) {
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -111,37 +167,53 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     .card-stack {
+        margin-left: 230px;
+
         img {
             width: 120px;
         }
     }
-    
+
+
+
     .pick-card {
         transition: all 125ms ease-in-out;
-        transform: scale(1.1)  translateY(-230px);
+        transform: scale(1) translateY(-200px) rotate(-100deg);
         animation: pick-card-animation 1s ease-in-out;
     }
-    
+
     @keyframes pick-card-animation {
         0% {
-            transform: scale(1.1);
+            transform: scale(1);
         }
+
         40% {
             transform: scale(1.5);
         }
+
         60% {
             transform: scale(1.5);
         }
+
         100% {
-            transform: scale(1.1) translateY(-230px);
+            transform: scale(1) translateY(-200px) rotate(-100deg);
         }
     }
-    
+
     .played-card {
         right: 25px;
         top: -50px;
-        transform: scale(1.1) translateY(-230px);
+        transform: scale(1) translateY(-200px) rotate(-100deg);
+    }
+}
+
+app-player,
+app-player-mobile {
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(1.4);
     }
 }

@@ -12,17 +12,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { MatCardModule } from '@angular/material/card';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
+import { ShiftPlayerPipe } from 'src/pipes/shiftPlayers.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +29,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     GameComponent,
     PlayerComponent,
     DialogAddPlayerComponent,
-    GameInfoComponent
+    GameInfoComponent,
+    ShiftPlayerPipe,
+    EditPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -42,14 +42,11 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     MatDialogModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
-    AngularFirestoreModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore())
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

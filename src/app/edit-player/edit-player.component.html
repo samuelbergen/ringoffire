@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Edit Player</h1>
+<form novalidate #form="ngForm">
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" name="name" [(ngModel)]="player.name" required autocomplete="off">
+    </mat-form-field>
+    <div class="profile-picture-container">
+      <label *ngFor="let profilePicture of profilePictures; let i=index;">
+        <input type="radio" name="profilePicture" [(ngModel)]="player.profilePicture"  [value]="profilePicture" required>
+        <img [class.selected]="player.profilePicture==profilePicture" src="assets/img/{{ profilePicture }}">
+      </label>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close color="warn" [mat-dialog-close]="'DELETE'">Delete</button>
+    <button mat-button [disabled]="!form.valid" [mat-dialog-close]="form.value">Save Changes</button>
+  </div>
+</form>

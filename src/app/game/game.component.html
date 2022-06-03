@@ -1,9 +1,19 @@
 <img class="bg" src="assets/img/board.jpg">
 
-<div class="p">
-<app-player *ngFor="let player of game.players; let i = index" class="player-position" [name]="player"
-    [playerActive]="i == game.currentPlayer"
-    [ngStyle]="{'top.px': 50 + (i * 100)}"></app-player>
+<div class="scroll-container hide-desktop">
+    <app-player *ngFor="let player of game.players|shiftPlayer:game.currentPlayer; let i = index" class="hide-desktop"
+        [name]="player.name" [profilePicture]="player.profilePicture"
+        [playerActive]="player == game.players[game.currentPlayer]" [player]="player" [i]="game.players.indexOf(player)"
+        [game]="game" [firestore]="firestore" [gameId]="gameId">
+    </app-player>
+</div>
+
+<div class="player-container hide-mobile">
+    <app-player *ngFor="let player of game.players|shiftPlayer:game.currentPlayer; let i = index"
+        class="player-position hide-mobile" [name]="player.name" [profilePicture]="player.profilePicture"
+        [playerActive]="player == game.players[game.currentPlayer]" [player]="player" [i]="game.players.indexOf(player)"
+        [game]="game" [firestore]="firestore" [gameId]="gameId" [ngStyle]="{'top.px': 50 + (i * 100)}">
+    </app-player>
 </div>
 
 <div class="field">
@@ -17,12 +27,18 @@
         <img *ngFor="let card of game.playedCards" class="played-card" src="assets/img/{{ card }}.png">
 
         <!-- Current card (Animation) -->
-        <img *ngIf="game.pickCardAnimation" class="pick-card" style="right: 25px; top: -50px" src="assets/img/{{ game.currentCard }}.png">
+        <img *ngIf="game.pickCardAnimation" class="pick-card" style="right: 25px; top: -50px"
+            src="assets/img/{{ game.currentCard }}.png">
     </div>
-    
 </div>
 
-<app-game-info [card]="game.currentCard" class="pin-bottom"></app-game-info>
+<div *ngIf="gameOver" class="game-over">
+    <img src="assets/img/gameover.jpg" class="gameover-bg">
+    <img (click)="startNewGame()" class="reload-img" src="assets/img/reload.png">
+</div>
+
+<app-game-info [card]="game.currentCard" [players]="game.players" class="pin-bottom">
+</app-game-info>
 
 <button (click)="openDialog()" mat-fab color="primary" class="btn-add">
     <mat-icon>add</mat-icon>
